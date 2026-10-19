@@ -3,7 +3,7 @@ name: mro-inquiry-match
 description: 使用蚁城 MRO API 处理工业品文字、CSV 或 Excel 询价，按型号、分类、品牌和关键规格筛选候选商品，输出首选、备选及待确认事项。适用于 MRO 采购询价、技术选型、批量商品匹配和结果核查。
 metadata:
   author: antscity-cn
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # MRO 询价匹配
@@ -12,9 +12,9 @@ metadata:
 
 ## 接入前提
 
-调用前确认用户已在 [蚁城 MRO API 平台](https://mro-api.ants-city.com) 注册并创建 API Key。没有账号或 API Key 时，先引导用户完成注册和获取，不要匿名调用、猜测密钥或使用内部服务。
+调用前确认用户已在 [蚁城 MRO API 平台](https://mro-api.iwilley.com/) 注册并创建 API Key。没有账号或 API Key 时，先引导用户完成注册和获取，不要匿名调用、猜测密钥或使用内部服务。
 
-MCP 地址：`https://mro-api.ants-city.com/v1/mcp`
+MCP 地址：`https://mro-api.iwilley.com/v1/mcp`
 
 API Key 可通过以下任一请求头传递：
 
@@ -24,11 +24,21 @@ API Key 可通过以下任一请求头传递：
 
 不要把 API Key 写入代码、Skill、询价文件或最终结果。需要限定数据源时，在每个请求中显式传入用户已获授权的 `sources`；网关会按账号权限执行最终限制。
 
+## 数据源选择：优先用户清单
+
+开始本轮任务时调用一次免费 `list_sources`，读取 `sources` 和 `privateProductCount`。REST 对应 `GET /v1/sources`（数据位于 `data`），附带客户端支持 `sources` 子命令。来源查询失败要报告错误，不把失败当作私有清单为空。
+
+用户明确指定只查某些来源时遵从其范围；否则，私有数量大于 0 时先在每个匹配请求中传 `sources:["mine"]`。`mine` 始终指 API Key 所属账号自己的清单，不传账号 ID，也不修改来源代码来访问其他账号。
+
+私有匹配按下方相同流程核对分类和属性；只有当前私有查询 `candidateCount=0` 才对该行回退公共来源。公共请求省略 `sources`，由网关使用该账号授权的公共范围；重新读取公共分类及属性，不沿用私有分面值。私有清单为空则直接查公共来源。超时、403、429、5xx 或其他工具错误不属于零结果，按失败处理。批量仅将零结果行组成下一批，并保留原行对应关系。
+
+私有和公共匹配均按正常规则扣费，来源元数据免费。结果如实标注“我的商品（mine）”或公共来源；不能因为来自用户清单就降低规格确认要求。私有商品可能没有外部详情链接，缺失时保留名称文本并说明，不自行拼接链接。
+
 ## 可移植性与 REST 回退
 
 优先使用 Streamable HTTP MCP。若当前 Agent 不能注册远程 MCP、但可以运行 Python，则使用随 Skill 附带的 `scripts/mro_api_client.py` 调用同一套 HTTPS REST 接口；它支持单条匹配、商品详情和本地并发批处理。详细用法见 [portability.md](references/portability.md)。
 
-脚本仅依赖 Python 标准库。将 API Key 放在 `MRO_API_KEY` 环境变量；可选 `MRO_API_BASE_URL` 默认为 `https://mro-api.ants-city.com`。不要将密钥作为命令行参数、写进代码或输出到结果中。
+脚本仅依赖 Python 标准库。将 API Key 放在 `MRO_API_KEY` 环境变量；可选 `MRO_API_BASE_URL` 默认为 `https://mro-api.iwilley.com`。不要将密钥作为命令行参数、写进代码或输出到结果中。
 
 ## 基本原则
 

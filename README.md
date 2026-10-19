@@ -11,7 +11,7 @@
 
 ## Quick Start (English)
 
-1. Register at the [MRO API platform](https://mro-api.iwilley.com), create an API key, and keep it in your agent's secret configuration or the `MRO_API_KEY` environment variable. Do not commit it to GitHub.
+1. Register at the [MRO API platform](https://mro-api.iwilley.com/), create an API key, and keep it in your agent's secret configuration or the `MRO_API_KEY` environment variable. Do not commit it to GitHub.
 
 2. **Install from GitHub:** ask your agent to install [`skills/mro-inquiry-match`](skills/mro-inquiry-match) from this repository. The workflow is defined in [`SKILL.md`](skills/mro-inquiry-match/SKILL.md). For a manual Codex installation:
 
@@ -62,7 +62,7 @@ MRO 工业品询价与选型辅助工具。
 
 ### 1. 注册账号
 
-访问 [MRO API 平台](https://mro-api.iwilley.com)，注册并登录账号。
+访问 [MRO API 平台](https://mro-api.iwilley.com/)，注册并登录账号。
 
 ### 2. 创建 API Key
 

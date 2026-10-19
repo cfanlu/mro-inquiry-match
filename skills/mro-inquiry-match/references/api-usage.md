@@ -2,10 +2,10 @@
 
 ## 服务和认证
 
-- 平台首页：`https://mro-api.ants-city.com`
-- MCP：`POST https://mro-api.ants-city.com/v1/mcp`
-- REST 匹配：`POST https://mro-api.ants-city.com/v1/match-inquiry`
-- REST 商品详情：`GET https://mro-api.ants-city.com/v1/products/{source}/{source_id}`
+- 平台首页：`https://mro-api.iwilley.com`
+- MCP：`POST https://mro-api.iwilley.com/v1/mcp`
+- REST 匹配：`POST https://mro-api.iwilley.com/v1/match-inquiry`
+- REST 商品详情：`GET https://mro-api.iwilley.com/v1/products/{source}/{source_id}`
 
 认证请求头任选一种：`Authorization: Bearer <API_KEY>`、`apikey: <API_KEY>` 或 `X-API-Key: <API_KEY>`。
 
@@ -150,3 +150,7 @@ MCP 提供三个工具：
 | 422 | 检查属性外层是否误传 `name`、`anyOf` 项是否缺少 `name/value`，以及分页参数。 |
 | 401/403 | 检查 API Key、账号状态和数据源权限。 |
 | 批量单项失败 | 查看 `results[index].error`，不要让一项错误覆盖整批结果。 |
+
+## 用户私有商品
+
+`list_sources` / `GET /v1/sources` 免费返回授权来源及 `privateProductCount`。`sources:["mine"]` 查询当前 API Key 所属账号的商品；省略 sources 仍为授权公共来源。商品详情沿用 `source="mine"` 和匹配响应原样返回的 sourceId，不能指定其他账号。私有匹配与详情正常扣费。先查私有、零结果再查公共由 Skill 编排，接口不自动回退。

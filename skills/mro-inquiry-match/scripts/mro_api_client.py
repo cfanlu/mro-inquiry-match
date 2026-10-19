@@ -19,7 +19,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlparse
 from urllib.request import Request, urlopen
 
-DEFAULT_BASE_URL = "https://mro-api.ants-city.com"
+DEFAULT_BASE_URL = "https://mro-api.iwilley.com"
 
 
 @dataclass
@@ -41,7 +41,7 @@ def json_input(path: str) -> Any:
 def api_config() -> tuple[str, str]:
     api_key = os.environ.get("MRO_API_KEY", "").strip()
     if not api_key:
-        raise ApiError(None, "MRO_API_KEY is required; register and create an API key at https://mro-api.ants-city.com")
+        raise ApiError(None, "MRO_API_KEY is required; register and create an API key at https://mro-api.iwilley.com")
     base_url = os.environ.get("MRO_API_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
     parsed = urlparse(base_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
@@ -136,6 +136,8 @@ def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description="REST fallback client for the Antscity MRO API")
     result.add_argument("--timeout", type=float, default=60.0, help="network timeout in seconds (default: 60)")
     commands = result.add_subparsers(dest="command", required=True)
+    sources = commands.add_parser("sources", help="list authorized sources and private catalogue count (free)")
+    sources.set_defaults(handler=lambda args: (print_json(call_api("GET", "/v1/sources", None, args.timeout)) or 0))
     match = commands.add_parser("match", help="call POST /v1/match-inquiry")
     match.add_argument("--input", required=True, help="JSON request file, or - for stdin")
     match.set_defaults(handler=match_command)
