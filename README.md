@@ -1,6 +1,6 @@
 # MRO Inquiry Matching Skill / MRO 询价匹配 Skill
 
-[![GitHub stars](https://img.shields.io/github/stars/antscity-cn/mro-inquiry-match?style=flat-square)](https://github.com/antscity-cn/mro-inquiry-match/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/cfanlu/mro-inquiry-match?style=flat-square)](https://github.com/cfanlu/mro-inquiry-match/stargazers)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue?style=flat-square)](LICENSE)
 
 **MRO industrial supplies inquiry matching skill** for purchasing and technical teams. Give an agent a product description, MPN, standard, brand, or specifications; it searches connected industrial catalogs, checks categories and key attributes, and reports a preferred candidate, alternatives, and anything that still needs confirmation. It handles individual inquiries and Excel/CSV batches.
@@ -11,17 +11,17 @@
 
 ## Quick Start (English)
 
-1. Register at the [Antscity MRO API platform](https://mro-api.ants-city.com), create an API key, and keep it in your agent's secret configuration or the `MRO_API_KEY` environment variable. Do not commit it to GitHub.
+1. Register at the [MRO API platform](https://mro-api.iwilley.com), create an API key, and keep it in your agent's secret configuration or the `MRO_API_KEY` environment variable. Do not commit it to GitHub.
 
 2. **Install from GitHub:** ask your agent to install [`skills/mro-inquiry-match`](skills/mro-inquiry-match) from this repository. The workflow is defined in [`SKILL.md`](skills/mro-inquiry-match/SKILL.md). For a manual Codex installation:
 
    ```bash
-   git clone https://github.com/antscity-cn/mro-inquiry-match.git
+   git clone https://github.com/cfanlu/mro-inquiry-match.git
    mkdir -p ~/.codex/skills
    cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
    ```
 
-3. Connect your agent to the remote MCP endpoint `https://mro-api.ants-city.com/v1/mcp`. If your agent cannot use remote MCP but can run Python 3, use the included [REST client](skills/mro-inquiry-match/references/portability.md) with `MRO_API_KEY` instead.
+3. Connect your agent to the remote MCP endpoint `https://mro-api.iwilley.com/v1/mcp`. If your agent cannot use remote MCP but can run Python 3, use the included [REST client](skills/mro-inquiry-match/references/portability.md) with `MRO_API_KEY` instead.
 
 4. Ask: `Use the MRO inquiry matching skill to find 六角盖形螺母 M8，A2，DIN 917. Check the category and key specifications before recommending a product.`
 
@@ -62,7 +62,7 @@ MRO 工业品询价与选型辅助工具。
 
 ### 1. 注册账号
 
-访问 [MRO API 平台](https://mro-api.ants-city.com)，注册并登录账号。
+访问 [MRO API 平台](https://mro-api.iwilley.com)，注册并登录账号。
 
 ### 2. 创建 API Key
 
@@ -75,7 +75,7 @@ API Key 相当于账号密码。请勿把它写进 GitHub、询价文件或公�
 支持远程 MCP 的 Agent 使用：
 
 ```text
-https://mro-api.ants-city.com/v1/mcp
+https://mro-api.iwilley.com/v1/mcp
 ```
 
 不能注册远程 MCP、但可以运行 Python 3 的 Agent，可使用 Skill 中的 `scripts/mro_api_client.py` 作为 REST 回退。设置 `MRO_API_KEY` 环境变量后，脚本可处理单条匹配、商品详情和本地并发批处理；详细用法见 [可移植性说明](skills/mro-inquiry-match/references/portability.md)。
@@ -86,13 +86,13 @@ https://mro-api.ants-city.com/v1/mcp
 
 ```text
 请安装这个MRO询价匹配 Skill：
-https://github.com/antscity-cn/mro-inquiry-match/tree/main/skills/mro-inquiry-match
+https://github.com/cfanlu/mro-inquiry-match/tree/main/skills/mro-inquiry-match
 ```
 
 如果使用 Codex，也可以手工安装：
 
 ```bash
-git clone https://github.com/antscity-cn/mro-inquiry-match.git
+git clone https://github.com/cfanlu/mro-inquiry-match.git
 mkdir -p ~/.codex/skills
 cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
 ```
