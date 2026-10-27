@@ -7,7 +7,7 @@
 
 ## WorkBuddy 操作视频 / Video Tutorial
 
-https://github.com/user-attachments/assets/086e7d0f-d392-437a-a7af-9c5f3afbe6c1
+https://github.com/user-attachments/assets/5339bb4e-0539-486a-9bd4-f8b8948478ff
 
 **2分34秒 · 1080p · 中文旁白与字幕 / Chinese narration and subtitles**
 
