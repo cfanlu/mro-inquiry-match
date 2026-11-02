@@ -8,7 +8,7 @@
 | 不能注册 MCP，但可运行 Python 3 | 使用 `scripts/mro_api_client.py` 调用 REST。脚本只依赖 Python 标准库。 |
 | 既不能调用网络 MCP，也不能执行脚本 | 说明无法读取实时商品数据；可帮助整理询价，但不能声称已完成在线匹配。 |
 
-无论采用哪种方式，都必须先在 [蚁城 MRO API 平台](https://mro-api.iwilley.com/) 注册并创建自己的 API Key。服务端按账号授权限制可查询的数据源。
+无论采用哪种方式，都必须先在 [MRO API 平台](https://mro-api.iwilley.com/) 注册并创建自己的 API Key。服务端按账号授权限制可查询的数据源。
 
 ## REST 回退脚本
 

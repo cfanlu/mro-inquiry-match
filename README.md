@@ -9,13 +9,9 @@
 
 https://github.com/user-attachments/assets/5339bb4e-0539-486a-9bd4-f8b8948478ff
 
-**2分34秒 · 1080p · 中文旁白与字幕 / Chinese narration and subtitles**
-
 从安装 Skill、注册并邮件激活账号、获取 API Key，到在 WorkBuddy 对话框完成配置、上传询价 Excel 和复核结果，跟着视频完成第一次询价。执行等待已剪辑。
 
 *Install the Skill, activate an account, obtain and configure an API key through WorkBuddy chat, submit an Excel inquiry, and review the results. Execution waits are edited out.*
-
-[下载操作视频 / Download MP4](assets/mro-inquiry-workbuddy-tutorial.mp4) · [中文字幕 / Chinese subtitles](assets/mro-inquiry-workbuddy-tutorial.zh-CN.srt)
 
 ## Quick Start (English)
 
@@ -39,7 +35,7 @@ The API requires an account and key; live calls may consume account credit. See 
 
 ## 中文说明
 
-MRO 工业品询价与选型辅助工具。
+MRO 工业品询价匹配选型辅助工具
 
 用户只需提供产品名称、型号、标准、品牌或规格参数，Skill 会调用MRO API，在线检索候选商品，逐步核对分类、品牌和关键规格，并给出首选商品、备选商品及需要人工确认的事项。
 
@@ -64,7 +60,7 @@ MRO 工业品询价与选型辅助工具。
 - 根据分类、尺寸、材质等关键规格逐步筛选
 - 从同一匹配层级中选择价格较低的商品
 - 给出首选商品、最多 5 个其他匹配项和待确认事项
-- 批量处理 Excel、CSV，并在原表后追加匹配结果
+- 批量处理询价，Excel 用可折叠父子行展示每条需求及其候选商品，并保留原始询价工作表
 
 ## 快速开始
 
@@ -127,14 +123,16 @@ cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
 
 ```text
 请使用 MRO 询价匹配 Skill 处理这份询价表。
-保留原始列，追加首选订货号、品牌、产品名称、人民币价格、
-匹配状态、匹配依据、待确认事项、其他匹配项和数据源，最后导出 Excel。
+保留原始询价工作表，匹配结果采用可折叠父子行：父行是原始需求，
+子行逐件展示首选和备选。前三列为产品名称、描述、规格型号并冻结，
+后面展示品牌、制造商编号、单位、数量、单价、状态、平台、链接和依据；
+原始标准、备注等附加列保留在末尾，最后导出 Excel。
 ```
 
 ## 结果包含什么
 
 - 首选商品、订货号、品牌和制造商型号
-- 商品名称及人民币参考价格
+- 商品名称、单价、数据源平台和详情页链接
 - 分类和规格匹配依据
 - 精确匹配、替代推荐、待确认或未找到状态
 - 需要采购或技术人员确认的问题
