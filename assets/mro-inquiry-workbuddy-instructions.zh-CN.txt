@@ -1,0 +1,15 @@
+安装技能：
+请安装这个MRO询价匹配Skill：
+https://github.com/cfanlu/mro-inquiry-match/tree/main/skills/mro-inquiry-match
+
+复制MRO API Key后，在WorkBuddy对话框发送：
+请使用这个MRO API Key，帮我完成配置并检查是否可用。
+API Key：<粘贴刚复制的完整密钥>
+
+添加原始Excel后提交：
+使用这个技能处理这个询价文件。
+保留原始询价工作表，匹配结果按需求分组：父行保留原始需求，子行逐件列出首选和备选。
+展示型号、单位、数量、参考单价、匹配状态、依据及待确认项；产品名称保留详情链接，最后导出Excel。
+
+API平台：https://mro-api.iwilley.com/
+未注册先注册，并到邮箱点击激活链接，激活后登录。

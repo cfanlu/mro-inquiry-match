@@ -7,11 +7,15 @@
 
 ## WorkBuddy 操作视频 / Video Tutorial
 
-https://github.com/user-attachments/assets/5339bb4e-0539-486a-9bd4-f8b8948478ff
+[![WorkBuddy 操作教程：按需求分组查看候选、参考价与待确认项](assets/mro-inquiry-workbuddy-tutorial-cover.png)](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4)
 
-从安装 Skill、注册并邮件激活账号、获取 API Key，到在 WorkBuddy 对话框完成配置、上传询价 Excel 和复核结果，跟着视频完成第一次询价。执行等待已剪辑。
+**新版分组结果教程 · 约 2 分 40 秒 · 横版 · Haoran 普通话 AI 旁白。** 点击封面打开或下载 MP4。
 
-*Install the Skill, activate an account, obtain and configure an API key through WorkBuddy chat, submit an Excel inquiry, and review the results. Execution waits are edited out.*
+从安装 Skill、注册并邮件激活账号、获取 API Key，到在 WorkBuddy 对话框完成配置、提交询价 Excel，跟着教程完成第一次询价。新版重点讲解：**浅蓝父行保留需求，组内子行列出候选，再核对参考单价、匹配依据和待确认事项**。安装及配置操作复用此前实录，文件与结果展示为新版案例；执行等待已剪辑。
+
+[视频 MP4](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4) · [章节与操作说明](docs/workbuddy-tutorial.zh-CN.md) · [中文字幕 SRT](assets/mro-inquiry-workbuddy-tutorial.zh-CN.srt) · [可复制的安装、配置和分组询价指令](assets/mro-inquiry-workbuddy-instructions.zh-CN.txt)
+
+*Install the Skill, activate an account, configure an API key through WorkBuddy chat, submit an Excel inquiry, and review results grouped by requirement. Parent rows preserve the original request; child rows list candidates, reference prices, matching evidence, and open questions. Reference prices and procurement conditions require confirmation.*
 
 ## Quick Start (English)
 
