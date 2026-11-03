@@ -7,9 +7,9 @@
 
 ## WorkBuddy 操作视频 / Video Tutorial
 
-[![WorkBuddy 操作教程：按需求分组查看候选、参考价与待确认项](assets/mro-inquiry-workbuddy-tutorial-cover.png)](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4)
+https://github.com/user-attachments/assets/531da73b-7f9a-4821-83f5-0bfedb73b2a1
 
-**新版分组结果教程 · 约 2 分 40 秒 · 横版 · Haoran 普通话 AI 旁白。** 点击封面打开或下载 MP4。
+**新版分组结果教程 · 约 2 分 34 秒 · 横版 · Haoran 普通话 AI 旁白。** 可在本页播放器直接播放；也可下载 MP4。
 
 从安装 Skill、注册并邮件激活账号、获取 API Key，到在 WorkBuddy 对话框完成配置、提交询价 Excel，跟着教程完成第一次询价。新版重点讲解：**浅蓝父行保留需求，组内子行列出候选，再核对参考单价、匹配依据和待确认事项**。安装及配置操作复用此前实录，文件与结果展示为新版案例；执行等待已剪辑。
 
