@@ -3,7 +3,7 @@ name: mro-inquiry-match
 description: 使用MRO API 处理工业品文字、CSV 或 Excel 询价，按型号、分类、品牌和关键规格筛选候选商品，输出首选、备选及待确认事项。适用于 MRO 采购询价、技术选型、批量商品匹配和结果核查。
 metadata:
   author: antscity-cn
-  version: "1.2.2"
+  version: "1.3.0"
 ---
 
 # MRO 询价匹配
@@ -12,7 +12,9 @@ metadata:
 
 ## 接入前提
 
-调用前确认用户已在 [MRO API 平台](https://mro-api.iwilley.com/) 注册并创建 API Key。没有账号或 API Key 时，先引导用户完成注册和获取，不要匿名调用、猜测密钥或使用内部服务。
+调用前确认已有用户自己的 API Key。缺少密钥时，提示用户提供用于接收激活邮件的邮箱，然后按 [邮箱接入与充值](references/account-access.md) 调用公开接入接口。正常情况直接发邮件；用户点击邮件链接，在网页完成阿里云行为验证后激活并登录，跳转现有 [API 密钥页面](https://mro-api.iwilley.com/keys)，复制自己的密钥并通过 Agent 密钥配置或私密输入交还。用户未提供邮箱时也可给出 [邮箱接入网页](https://mro-api.iwilley.com/email-access)。
+
+仅邮件接入接口允许无 API Key 调用；商品检索仍必须鉴权。风控要求网页验证时，直接给用户返回的同站 `verifyUrl`，不要自动解验证码、反复发信或换邮箱/IP 绕过限制。已有旧账号使用原登录方式，不重复注册。不得获取用户邮箱密码、读取激活邮件或替用户消费激活链接。
 
 MCP 地址：`https://mro-api.iwilley.com/v1/mcp`
 
@@ -23,6 +25,8 @@ API Key 可通过以下任一请求头传递：
 - `X-API-Key: <API_KEY>`
 
 不要把 API Key 写入代码、Skill、询价文件或最终结果。需要限定数据源时，在每个请求中显式传入用户已获授权的 `sources`；网关会按账号权限执行最终限制。
+
+收到明确的 `error.code="insufficient_user_quota"` 时暂停后续付费调用，给出响应的同站 `error.action.url`，默认是 [钱包充值](https://mro-api.iwilley.com/wallet)。保留已完成行和当前筛选步骤，等用户确认充值完成后从失败处继续。不自动付款或轮询余额；401、数据源无权限、令牌限额、429、5xx 不当作欠费，批量请求也须逐项检查。详细规则见 [邮箱接入与充值](references/account-access.md)。
 
 ## 数据源选择：优先用户清单
 

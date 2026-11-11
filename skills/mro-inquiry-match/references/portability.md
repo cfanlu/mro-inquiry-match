@@ -8,7 +8,13 @@
 | 不能注册 MCP，但可运行 Python 3 | 使用 `scripts/mro_api_client.py` 调用 REST。脚本只依赖 Python 标准库。 |
 | 既不能调用网络 MCP，也不能执行脚本 | 说明无法读取实时商品数据；可帮助整理询价，但不能声称已完成在线匹配。 |
 
-无论采用哪种方式，都必须先在 [MRO API 平台](https://mro-api.iwilley.com/) 注册并创建自己的 API Key。服务端按账号授权限制可查询的数据源。
+商品查询必须使用用户自己的 API Key。没有密钥时按 [邮箱接入与充值](account-access.md) 先发送接入邮件，用户在网页验证、激活并登录后，到现有 API 密钥页面复制密钥。公开邮件入口无需 API Key；商品接口仍由服务端按账号授权限制数据源。
+
+```bash
+python3 scripts/mro_api_client.py email-start --email user@example.com
+```
+
+风控返回网页验证要求或发信限流时停止自动重试。明确欠费时给出钱包链接，待用户充值确认后从失败步骤继续。
 
 ## REST 回退脚本
 

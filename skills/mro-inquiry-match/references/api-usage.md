@@ -148,7 +148,7 @@ MCP 提供三个工具：
 | `attribute_value_not_found` | 使用分布中返回的原始值和单位格式。 |
 | `attribute_combination_no_match` | 分别提交属性组定位冲突；关键规格不放宽。 |
 | 422 | 检查属性外层是否误传 `name`、`anyOf` 项是否缺少 `name/value`，以及分页参数。 |
-| 401/403 | 检查 API Key、账号状态和数据源权限。 |
+| 401/403 | 检查 API Key、账号状态和数据源权限。仅 `error.code=insufficient_user_quota` 表示账户余额不足，暂停付费调用并给钱包充值链接。 |
 | 批量单项失败 | 查看 `results[index].error`，不要让一项错误覆盖整批结果。 |
 
 ## 用户私有商品

@@ -26,6 +26,16 @@ DEFAULT_BASE_URL = "https://mro-api.iwilley.com"
 class ApiError(Exception):
     status: int | None
     message: str
+    code: str | None = None
+    action: dict[str, Any] | None = None
+
+    def as_dict(self) -> dict[str, Any]:
+        result: dict[str, Any] = {"status": self.status, "message": self.message}
+        if self.code:
+            result["code"] = self.code
+        if self.action:
+            result["action"] = self.action
+        return result
 
 
 def json_input(path: str) -> Any:
@@ -38,10 +48,10 @@ def json_input(path: str) -> Any:
         raise ApiError(None, f"cannot read JSON input: {exc}") from exc
 
 
-def api_config() -> tuple[str, str]:
+def api_config(require_key: bool = True) -> tuple[str, str]:
     api_key = os.environ.get("MRO_API_KEY", "").strip()
-    if not api_key:
-        raise ApiError(None, "MRO_API_KEY is required; register and create an API key at https://mro-api.iwilley.com")
+    if require_key and not api_key:
+        raise ApiError(None, "MRO_API_KEY is required; use email-start to request an access email, then copy your key from https://mro-api.iwilley.com/keys")
     base_url = os.environ.get("MRO_API_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
     parsed = urlparse(base_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
@@ -69,7 +79,10 @@ def tls_context() -> ssl.SSLContext:
 
 
 def call_api(method: str, path: str, payload: Any | None, timeout: float) -> Any:
-    base_url, api_key = api_config()
+    anonymous = method == "POST" and path == "/api/access/email/start"
+    base_url, api_key = api_config(require_key=not anonymous)
+    if anonymous and urlparse(base_url).scheme != "https":
+        raise ApiError(None, "Email access requires HTTPS")
     body = None if payload is None else json.dumps(payload, ensure_ascii=False).encode("utf-8")
     request = Request(
         f"{base_url}{path}",
@@ -77,7 +90,7 @@ def call_api(method: str, path: str, payload: Any | None, timeout: float) -> Any
         method=method,
         headers={
             "Accept": "application/json",
-            "Authorization": f"Bearer {api_key}",
+            **({"Authorization": f"Bearer {api_key}"} if not anonymous else {}),
             **({"Content-Type": "application/json"} if body is not None else {}),
         },
     )
@@ -86,7 +99,23 @@ def call_api(method: str, path: str, payload: Any | None, timeout: float) -> Any
             return decode_response(response.read())
     except HTTPError as exc:
         detail = decode_response(exc.read())
-        raise ApiError(exc.code, json.dumps(detail, ensure_ascii=False)) from exc
+        error = detail.get("error", detail) if isinstance(detail, dict) else {}
+        code = error.get("code")
+        action = error.get("action")
+        if code == "human_verification_required":
+            action = {"type": "verify", "url": error.get("verifyUrl")}
+        if isinstance(action, dict):
+            target = urlparse(str(action.get("url", "")))
+            base = urlparse(base_url)
+            if target.scheme != "https" or target.netloc != base.netloc or target.username is not None:
+                action = None
+        else:
+            action = None
+        message = error.get("message") or "API request failed"
+        retry_after = exc.headers.get("Retry-After") if exc.headers else None
+        if retry_after:
+            message = f"{message} (Retry-After: {retry_after})"
+        raise ApiError(exc.code, str(message), code, action) from exc
     except URLError as exc:
         raise ApiError(None, f"network error: {exc.reason}") from exc
 
@@ -123,11 +152,28 @@ def batch_command(args: argparse.Namespace) -> int:
         try:
             return {"index": index, "result": call_api("POST", "/v1/match-inquiry", inquiry, args.timeout)}
         except ApiError as exc:
-            return {"index": index, "error": {"status": exc.status, "message": exc.message}}
+            return {"index": index, "error": exc.as_dict()}
 
     workers = min(max(args.workers, 1), len(inquiries), 8)
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
-        results = list(executor.map(lambda pair: one(*pair), enumerate(inquiries)))
+        pending = {executor.submit(one, index, inquiries[index]): index for index in range(workers)}
+        next_index = workers
+        stopped = False
+        results = []
+        while pending:
+            done, _ = concurrent.futures.wait(pending, return_when=concurrent.futures.FIRST_COMPLETED)
+            for future in done:
+                pending.pop(future)
+                result = future.result()
+                results.append(result)
+                if result.get("error", {}).get("code") == "insufficient_user_quota":
+                    stopped = True
+            while not stopped and len(pending) < workers and next_index < len(inquiries):
+                pending[executor.submit(one, next_index, inquiries[next_index])] = next_index
+                next_index += 1
+        for index in range(next_index, len(inquiries)):
+            results.append({"index": index, "error": {"code": "paused_for_recharge", "message": "Not sent; recharge and resume this item."}})
+        results.sort(key=lambda item: item["index"])
     print_json({"results": results})
     return 0 if all("result" in item for item in results) else 1
 
@@ -136,6 +182,9 @@ def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description="REST fallback client for the Antscity MRO API")
     result.add_argument("--timeout", type=float, default=60.0, help="network timeout in seconds (default: 60)")
     commands = result.add_subparsers(dest="command", required=True)
+    email = commands.add_parser("email-start", help="request an access email without an API key; user completes activation in browser")
+    email.add_argument("--email", required=True, help="email explicitly supplied by the user")
+    email.set_defaults(handler=lambda args: (print_json(call_api("POST", "/api/access/email/start", {"email": args.email}, args.timeout)) or 0))
     sources = commands.add_parser("sources", help="list authorized sources and private catalogue count (free)")
     sources.set_defaults(handler=lambda args: (print_json(call_api("GET", "/v1/sources", None, args.timeout)) or 0))
     match = commands.add_parser("match", help="call POST /v1/match-inquiry")
@@ -157,7 +206,7 @@ def main() -> int:
     try:
         return args.handler(args)
     except ApiError as exc:
-        print_json({"error": {"status": exc.status, "message": exc.message}})
+        print_json({"error": exc.as_dict()})
         return 1
 
 

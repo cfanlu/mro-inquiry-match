@@ -15,9 +15,7 @@ https://github.com/user-attachments/assets/531da73b-7f9a-4821-83f5-0bfedb73b2a1
 
 ## Quick Start (English)
 
-1. Register at the [MRO API platform](https://mro-api.iwilley.com/), create an API key, and keep it in your agent's secret configuration or the `MRO_API_KEY` environment variable. Do not commit it to GitHub.
-
-2. **Install from GitHub:** ask your agent to install [`skills/mro-inquiry-match`](skills/mro-inquiry-match) from this repository. The workflow is defined in [`SKILL.md`](skills/mro-inquiry-match/SKILL.md). For a manual Codex installation:
+1. **Install from GitHub:** ask your agent to install [`skills/mro-inquiry-match`](skills/mro-inquiry-match) from this repository. The workflow is defined in [`SKILL.md`](skills/mro-inquiry-match/SKILL.md). For a manual Codex installation:
 
    ```bash
    git clone https://github.com/cfanlu/mro-inquiry-match.git
@@ -25,11 +23,13 @@ https://github.com/user-attachments/assets/531da73b-7f9a-4821-83f5-0bfedb73b2a1
    cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
    ```
 
+2. Ask your agent to request an access email, or open [Email access](https://mro-api.iwilley.com/email-access). Open the email link, complete human verification, and you will be signed in and taken to [API Keys](https://mro-api.iwilley.com/keys). Copy your key to your agent's secret configuration or `MRO_API_KEY`. Existing accounts use their original sign-in method; MFA still applies. Do not commit credentials to GitHub.
+
 3. Connect your agent to the remote MCP endpoint `https://mro-api.iwilley.com/v1/mcp`. If your agent cannot use remote MCP but can run Python 3, use the included [REST client](skills/mro-inquiry-match/references/portability.md) with `MRO_API_KEY` instead.
 
 4. Ask: `Use the MRO inquiry matching skill to find 六角盖形螺母 M8，A2，DIN 917. Check the category and key specifications before recommending a product.`
 
-The API requires an account and key; live calls may consume account credit. See the [Chinese setup guide below](#快速开始) for more examples. Search terms: **mro skill**, **inquiry matching skill**, **industrial product matching**, **MRO purchasing**.
+Product queries require an account and key; live calls may consume account credit. If credit runs out, the agent pauses and gives you the [wallet link](https://mro-api.iwilley.com/wallet). Recharge there, then tell the agent to resume. See the [Chinese setup guide below](#快速开始) for more examples. Search terms: **mro skill**, **inquiry matching skill**, **industrial product matching**, **MRO purchasing**.
 
 ---
 
@@ -64,27 +64,7 @@ The API requires an account and key; live calls may consume account credit. See 
 
 ## 快速开始
 
-### 1. 注册账号
-
-访问 [MRO API 平台](https://mro-api.iwilley.com/)，注册并登录账号。
-
-### 2. 创建 API Key
-
-登录后打开“API 密钥”，创建并复制自己的 API Key。
-
-API Key 相当于账号密码。请勿把它写进 GitHub、询价文件或公开聊天记录；优先通过 Agent 的密钥配置或环境变量保存。
-
-### 3. 连接方式
-
-支持远程 MCP 的 Agent 使用：
-
-```text
-https://mro-api.iwilley.com/v1/mcp
-```
-
-不能注册远程 MCP、但可以运行 Python 3 的 Agent，可使用 Skill 中的 `scripts/mro_api_client.py` 作为 REST 回退。设置 `MRO_API_KEY` 环境变量后，脚本可处理单条匹配、商品详情和本地并发批处理；详细用法见 [可移植性说明](skills/mro-inquiry-match/references/portability.md)。
-
-### 4. 让 Agent 安装 Skill
+### 1. 让 Agent 安装 Skill
 
 将下面这段话发送给 Codex、WorkBuddy，或其他支持从 GitHub 加载 Skill 的 Agent：
 
@@ -102,6 +82,30 @@ cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
 ```
 
 安装后重新启动或刷新 Agent，使 Skill 生效。
+
+### 2. 用邮箱接入
+
+安装 Skill 后，缺少 API Key 时 Agent 会提示你提供接收激活邮件的邮箱。点击邮件链接，在网页完成阿里云行为验证后，即可激活、登录并进入现有“API 密钥”页面；也可直接打开 [邮箱接入](https://mro-api.iwilley.com/email-access)。无需填写一套账号密码。
+
+正常请求直接发邮件；频率异常时，按 Agent 提供的网页链接先验证再发信。链接 15 分钟有效，只能用一次。已有旧账号继续使用原登录方式，已开启的 MFA 不会跳过。
+
+### 3. 复制 API Key
+
+激活后进入 [API 密钥](https://mro-api.iwilley.com/keys)，复制初始 `MRO Skill` 密钥，按 Agent 提示配置。已有账号可复制现有密钥或在该页创建密钥。
+
+API Key 相当于账号密码。请勿把它写进 GitHub、询价文件或公开聊天记录；优先通过 Agent 的密钥配置或环境变量保存。
+
+余额不足时，Agent 会暂停并给出 [钱包充值链接](https://mro-api.iwilley.com/wallet)。在网页充值后告诉 Agent“已充值，继续”，即可从失败处续跑，保留已完成的结果。
+
+### 4. 连接方式
+
+支持远程 MCP 的 Agent 使用：
+
+```text
+https://mro-api.iwilley.com/v1/mcp
+```
+
+不能注册远程 MCP、但可以运行 Python 3 的 Agent，可使用 Skill 中的 `scripts/mro_api_client.py` 作为 REST 回退。设置 `MRO_API_KEY` 环境变量后，脚本可处理单条匹配、商品详情和本地并发批处理；详细用法见 [可移植性说明](skills/mro-inquiry-match/references/portability.md)。
 
 ### 5. 提交询价
 

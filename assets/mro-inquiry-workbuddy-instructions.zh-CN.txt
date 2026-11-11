@@ -12,4 +12,6 @@ API Key：<粘贴刚复制的完整密钥>
 展示型号、单位、数量、参考单价、匹配状态、依据及待确认项；产品名称保留详情链接，最后导出Excel。
 
 API平台：https://mro-api.iwilley.com/
-未注册先注册，并到邮箱点击激活链接，激活后登录。
+没有 API Key 时，向 Agent 提供接收访问邮件的邮箱；点击邮件链接，在网页完成阿里云行为验证后自动激活、登录并进入 API 密钥页面，复制 MRO Skill 密钥。
+也可访问 https://mro-api.iwilley.com/email-access。已有旧账号使用原方式登录，MFA 仍需完成。
+余额不足时访问 https://mro-api.iwilley.com/wallet 充值，再告诉 Agent 继续；保留已完成的匹配结果。
