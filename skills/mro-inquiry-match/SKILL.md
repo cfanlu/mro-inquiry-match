@@ -3,7 +3,7 @@ name: mro-inquiry-match
 description: 使用MRO API 处理工业品文字、CSV 或 Excel 询价，按型号、分类、品牌和关键规格筛选候选商品，输出首选、备选及待确认事项。适用于 MRO 采购询价、技术选型、批量商品匹配和结果核查。
 metadata:
   author: antscity-cn
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # MRO 询价匹配
@@ -12,7 +12,7 @@ metadata:
 
 ## 接入前提
 
-调用前确认已有用户自己的 API Key。缺少密钥时，提示用户提供用于接收激活邮件的邮箱，然后按 [邮箱接入与充值](references/account-access.md) 调用公开接入接口。正常情况直接发邮件；用户点击邮件链接，在网页完成阿里云行为验证后激活并登录，跳转现有 [API 密钥页面](https://mro-api.iwilley.com/keys)，复制自己的密钥并通过 Agent 密钥配置或私密输入交还。用户未提供邮箱时也可给出 [邮箱接入网页](https://mro-api.iwilley.com/email-access)。
+调用前确认已有用户自己的 API Key。缺少密钥时，提示用户提供用于接收激活邮件的邮箱，然后按 [邮箱接入与充值](references/account-access.md) 调用公开接入接口。正常情况直接发邮件；用户点击邮件链接，在网页完成阿里云行为验证后激活并登录，跳转现有 [API 密钥页面](https://mro-api.iwilley.com/keys)。明确指导用户点击密钥旁的“复制密钥”按钮，回到当前智能体的私密对话粘贴完整密钥，或放入 Agent 密钥配置。用户未提供邮箱时也可给出 [邮箱接入网页](https://mro-api.iwilley.com/email-access)。
 
 仅邮件接入接口允许无 API Key 调用；商品检索仍必须鉴权。风控要求网页验证时，直接给用户返回的同站 `verifyUrl`，不要自动解验证码、反复发信或换邮箱/IP 绕过限制。已有旧账号使用原登录方式，不重复注册。不得获取用户邮箱密码、读取激活邮件或替用户消费激活链接。
 

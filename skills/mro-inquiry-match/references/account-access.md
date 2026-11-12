@@ -5,15 +5,15 @@
 1. 向用户说明需要用于接收激活链接的邮箱；用户提供邮箱即授权发送本次接入邮件。不要从询价表联系人字段自行取邮箱。
 2. 无需 API Key，向 `https://mro-api.iwilley.com/api/access/email/start` 发送 `POST`，`Content-Type: application/json`，请求体 `{"email":"user@example.com"}`。不会在此步骤创建账号或返回 API Key。也可以运行 `python3 scripts/mro_api_client.py email-start --email user@example.com`。
 3. 成功返回 `{"success":true,"data":{"next":"check_email","expiresIn":900},"message":"..."}`，提示用户查看邮箱。不要重复发送或声称账号已激活。
-4. 用户点击邮件链接，自行在网页完成阿里云行为验证；通过后完成激活和登录，进入 `/keys`。新账号已有名为 `MRO Skill` 的初始密钥，复制后通过 Agent 安全配置或私密输入提供；不要在回复中复述完整密钥。后续支持邮件登录的账号使用同一流程；旧账号仍用原方式登录，邮件中会提供说明，不能绕过 MFA。
+4. 用户点击邮件中的“进入平台并复制密钥”，自行在网页完成阿里云行为验证；通过后完成激活和登录，进入 `/keys`。明确告知：找到初始 `MRO Skill` 密钥 → 点击右侧“复制密钥”按钮（成功显示“已复制”）→ 回到当前智能体私密对话，粘贴完整密钥并发送，或按 Agent 提示放入安全配置。不要让用户手工复制带星号的遮罩文字，也不要在回复中复述完整密钥。没有可用密钥时，使用该页面“创建 API 密钥”。后续支持邮件登录的账号使用同一流程；旧账号仍用原方式登录，邮件中会提供说明，不能绕过 MFA。
 5. 得到密钥后免费调用 `list_sources` / `GET /v1/sources` 验证接入，再继续商品匹配。没有网络能力时给出 `/email-access` 网页和手动获取步骤，不伪造发送成功。
 
 激活链接有效期 15 分钟，只可使用一次；GET/页面打开本身不激活。链接令牌在 URL fragment 中，不要求用户复制给 Agent。刷新导致令牌丢失时重新打开原邮件链接；已使用或过期时重新申请。
 
 ### 风控及错误
 
-- HTTP 403、`code="human_verification_required"`：显示同站 HTTPS `verifyUrl`（默认 `/email-access`），让用户到网页填邮箱、完成验证后发送邮件。Agent 在此等待，不能自己调用浏览器激活专用接口。
-- HTTP 429、`code="email_rate_limited"`：按 `Retry-After` 提示等待，不立即重试或更换身份。
+- HTTP 403、`code="human_verification_required"`：显示同站 HTTPS `verifyUrl`（默认 `/email-access`），让用户到网页填邮箱，点击默认可用的“发送访问邮件”按钮，弹出阿里云行为验证，通过后自动发信。取消验证不会发信，可以重新点击。Agent 在此等待，不能自己调用浏览器激活专用接口。
+- HTTP 429、`code="email_rate_limited"`：按 `Retry-After` 提示等待，不立即重试或更换身份。发信失败也可能消耗申请次数；修复邮箱设置后仍应遵守当前窗口，行为验证不会绕过硬限流。
 - HTTP 503：发信、行为验证或服务不可用，说明实际错误；不要当作“邮件已发送”。可以提供现有 [登录入口](https://mro-api.iwilley.com/sign-in)。
 - 用户未收到邮件先检查垃圾箱。不要自动连续申请。
 

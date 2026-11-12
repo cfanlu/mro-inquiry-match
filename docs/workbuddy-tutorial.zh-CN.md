@@ -31,7 +31,7 @@ https://github.com/cfanlu/mro-inquiry-match/tree/main/skills/mro-inquiry-match
 
 ## 2. 获取并配置 Key
 
-安装 Skill 后，缺少密钥时向 Agent 提供用于接收访问邮件的邮箱；也可打开 [邮箱接入](https://mro-api.iwilley.com/email-access)。点击邮件链接，在网页完成阿里云行为验证后，自动激活、登录并跳到“API 密钥”页面，复制 `MRO Skill` 初始密钥。已有旧账号使用原方式登录，再复制现有密钥或创建密钥；MFA 仍需完成。
+安装 Skill 后，缺少密钥时向 Agent 提供用于接收访问邮件的邮箱；也可打开 [邮箱接入](https://mro-api.iwilley.com/email-access)，填写邮箱后点击“发送访问邮件”，通过弹出的行为验证后自动发信。点击邮件链接，在网页完成阿里云行为验证后，自动激活、登录并跳到“API 密钥”页面。找到 `MRO Skill` 初始密钥，点击右侧“复制密钥”按钮，显示“已复制”后回到 WorkBuddy 私密对话，粘贴完整密钥并发送。不要复制页面上带星号的遮罩文字。已有旧账号使用原方式登录，再复制现有密钥或创建密钥；MFA 仍需完成。
 
 邮件链接 15 分钟有效；频率异常时先在网页验证再发信。视频保留原界面操作演示，新的邮箱接入步骤以本文为准。余额不足时按 Agent 提示打开[钱包](https://mro-api.iwilley.com/wallet)充值，充值后告诉 Agent 继续。
 

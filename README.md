@@ -2,6 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/cfanlu/mro-inquiry-match?style=flat-square)](https://github.com/cfanlu/mro-inquiry-match/stargazers)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue?style=flat-square)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/cfanlu/mro-inquiry-match?style=flat-square)](https://github.com/cfanlu/mro-inquiry-match/releases/latest)
 
 **MRO industrial supplies inquiry matching skill** for purchasing and technical teams. Give an agent a product description, MPN, standard, brand, or specifications; it searches connected industrial catalogs, checks categories and key attributes, and reports a preferred candidate, alternatives, and anything that still needs confirmation. It handles individual inquiries and Excel/CSV batches.
 
@@ -23,7 +24,7 @@ https://github.com/user-attachments/assets/531da73b-7f9a-4821-83f5-0bfedb73b2a1
    cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
    ```
 
-2. Ask your agent to request an access email, or open [Email access](https://mro-api.iwilley.com/email-access). Open the email link, complete human verification, and you will be signed in and taken to [API Keys](https://mro-api.iwilley.com/keys). Copy your key to your agent's secret configuration or `MRO_API_KEY`. Existing accounts use their original sign-in method; MFA still applies. Do not commit credentials to GitHub.
+2. Ask your agent to request an access email, or open [Email access](https://mro-api.iwilley.com/email-access) and click **Send access email** to complete verification and send. Open the email link, complete human verification, and you will be signed in and taken to [API Keys](https://mro-api.iwilley.com/keys). Click **Copy Key** next to `MRO Skill`, then paste the full key into your trusted agent's private conversation or secret configuration (`MRO_API_KEY`). Existing accounts use their original sign-in method; MFA still applies. Do not commit credentials to GitHub.
 
 3. Connect your agent to the remote MCP endpoint `https://mro-api.iwilley.com/v1/mcp`. If your agent cannot use remote MCP but can run Python 3, use the included [REST client](skills/mro-inquiry-match/references/portability.md) with `MRO_API_KEY` instead.
 
@@ -83,15 +84,25 @@ cp -R mro-inquiry-match/skills/mro-inquiry-match ~/.codex/skills/
 
 安装后重新启动或刷新 Agent，使 Skill 生效。
 
+也可以从 [最新 Release](https://github.com/cfanlu/mro-inquiry-match/releases/latest) 下载 `mro-inquiry-match-v1.3.1.zip`，解压后将 `mro-inquiry-match` 文件夹交给 Agent 安装。下载附件中的 Skill 安装包即可，无需下载整个仓库和演示视频。
+
 ### 2. 用邮箱接入
 
 安装 Skill 后，缺少 API Key 时 Agent 会提示你提供接收激活邮件的邮箱。点击邮件链接，在网页完成阿里云行为验证后，即可激活、登录并进入现有“API 密钥”页面；也可直接打开 [邮箱接入](https://mro-api.iwilley.com/email-access)。无需填写一套账号密码。
 
 正常请求直接发邮件；频率异常时，按 Agent 提供的网页链接先验证再发信。链接 15 分钟有效，只能用一次。已有旧账号继续使用原登录方式，已开启的 MFA 不会跳过。
 
+在邮箱接入网页上，填写邮箱后直接点击 **“发送访问邮件”**，弹出行为验证，通过后自动发送。出现“申请过于频繁”时按提示等待，不要连续申请。
+
 ### 3. 复制 API Key
 
-激活后进入 [API 密钥](https://mro-api.iwilley.com/keys)，复制初始 `MRO Skill` 密钥，按 Agent 提示配置。已有账号可复制现有密钥或在该页创建密钥。
+激活后会自动进入 [API 密钥](https://mro-api.iwilley.com/keys)：
+
+1. 找到名为 `MRO Skill` 的密钥，点击右侧 **“复制密钥”**，按钮显示“已复制”即成功。
+2. 回到刚才发起询价的智能体私密对话，粘贴完整密钥并发送，或按 Agent 提示放入密钥配置。
+3. 告诉 Agent“继续询价匹配”。
+
+不要手工复制页面上带星号的遮罩文字。已有账号可复制现有密钥；没有可用密钥时，在该页点击“创建 API 密钥”。
 
 API Key 相当于账号密码。请勿把它写进 GitHub、询价文件或公开聊天记录；优先通过 Agent 的密钥配置或环境变量保存。
 
