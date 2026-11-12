@@ -1,22 +1,22 @@
-# WorkBuddy 新手教程：分组结果版
+# WorkBuddy 新手教程：邮箱快捷接入与分组结果
 
 [![点击封面打开或下载教程](../assets/mro-inquiry-workbuddy-tutorial-cover.png)](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4)
 
 [打开 / 下载 MP4](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4) · [中文字幕 SRT](../assets/mro-inquiry-workbuddy-tutorial.zh-CN.srt) · [可复制指令](../assets/mro-inquiry-workbuddy-instructions.zh-CN.txt)
 
-约 2 分 34 秒，1920×1080、30fps，Haoran 普通话 AI 旁白。视频已烧录字幕，播放时无需再次加载 SRT；单独提供的字幕用于检索和后续编辑。
+约 2 分 14 秒，1920×1080、30fps，Haoran 普通话 AI 旁白。视频已烧录字幕，播放时无需再次加载 SRT；单独提供的字幕用于检索和后续编辑。
 
 ## 章节
 
 | 时间 | 内容 |
 | --- | --- |
-| 00:00 | 从安装到第一份分组询价结果 |
-| 00:07 | 安装 MRO 询价匹配 Skill |
-| 00:29 | 注册、邮件激活、创建和复制 API Key |
-| 00:59 | 将 Key 发给 WorkBuddy，完成配置验证 |
-| 01:33 | 添加询价 Excel，说明分组要求，打开结果 |
-| 01:54 | 按需求分组复核：压力表案例 |
-| 02:24 | 用自己的脱敏询价试一次 |
+| 00:00 | 本片要完成什么 |
+| 00:07 | 安装MRO询价匹配Skill |
+| 00:29 | 邮箱接入、复制密钥并发回 WorkBuddy |
+| 00:57 | 原始询价表怎么填：必填、可选和列顺序 |
+| 01:13 | 提交询价Excel，打开结果 |
+| 01:34 | 按需求分组复核：压力表 |
+| 02:04 | 用自己的询价试一次 |
 
 ## 1. 安装
 
@@ -31,9 +31,9 @@ https://github.com/cfanlu/mro-inquiry-match/tree/main/skills/mro-inquiry-match
 
 ## 2. 获取并配置 Key
 
-安装 Skill 后，缺少密钥时向 Agent 提供用于接收访问邮件的邮箱；也可打开 [邮箱接入](https://mro-api.iwilley.com/email-access)，填写邮箱后点击“发送访问邮件”，通过弹出的行为验证后自动发信。点击邮件链接，在网页完成阿里云行为验证后，自动激活、登录并跳到“API 密钥”页面。找到 `MRO Skill` 初始密钥，点击右侧“复制密钥”按钮，显示“已复制”后回到 WorkBuddy 私密对话，粘贴完整密钥并发送。不要复制页面上带星号的遮罩文字。已有旧账号使用原方式登录，再复制现有密钥或创建密钥；MFA 仍需完成。
+安装 Skill 后，缺少密钥时向 Agent 提供用于接收访问邮件的邮箱；也可打开 [邮箱接入](https://mro-api.iwilley.com/email-access)，填写邮箱后点击“发送访问邮件”，通过弹出的行为验证后自动发信。点击邮件链接，在网页完成阿里云行为验证后，自动激活、登录并跳到“API 密钥”页面。找到已启用的密钥，点击右侧“复制密钥”按钮，显示“已复制”后回到 WorkBuddy 私密对话，粘贴完整密钥并发送。不要复制页面上带星号的遮罩文字。已有旧账号使用原方式登录，再复制现有密钥或创建密钥；MFA 仍需完成。
 
-邮件链接 15 分钟有效；频率异常时先在网页验证再发信。视频保留原界面操作演示，新的邮箱接入步骤以本文为准。余额不足时按 Agent 提示打开[钱包](https://mro-api.iwilley.com/wallet)充值，充值后告诉 Agent 继续。
+邮件链接 15 分钟有效；频率异常时先在网页验证再发信。新版视频已按邮箱接入流程更新，复制按钮采用真实页面截图。余额不足时按 Agent 提示打开[钱包](https://mro-api.iwilley.com/wallet)充值，充值后告诉 Agent 继续。
 
 在自己的 WorkBuddy 对话框发送：
 
@@ -54,7 +54,9 @@ API Key：<替换为自己复制的完整密钥>
 展示型号、单位、数量、参考单价、匹配状态、依据及待确认项；产品名称保留详情链接，最后导出 Excel。
 ```
 
-处理完成后，打开回复中的结果 Excel。视频里的安装和配置操作沿用此前实录；上传及提交要求以操作说明呈现，文件与分组结果对应新版案例，没有把分段录屏描述成一次未经剪辑的完整执行。等待已剪辑；本次同时删除打开结果说明后的6.5秒纯静音，不能据此推算真实处理速度。
+视频从 00:57 开始讲解原始文件要求：每行一个产品需求，只有产品描述必填。型号、品牌、数量、单位等其他列全部可选，有就填，没有可留空；列顺序不限，无需固定模板。随后展示本次10条原始需求，再提交给WorkBuddy。
+
+处理完成后，打开回复中的结果 Excel，按下列顺序复核。
 
 ## 4. 怎样看分组结果
 

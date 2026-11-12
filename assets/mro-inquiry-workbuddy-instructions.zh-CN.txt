@@ -1,17 +1,19 @@
-安装技能：
+安装 Skill：
 请安装这个MRO询价匹配Skill：
 https://github.com/cfanlu/mro-inquiry-match/tree/main/skills/mro-inquiry-match
 
-复制MRO API Key后，在WorkBuddy对话框发送：
-请使用这个MRO API Key，帮我完成配置并检查是否可用。
-API Key：<粘贴刚复制的完整密钥>
+没有 API Key，在 WorkBuddy 私密对话发送：
+请帮我接入 MRO 服务。
+接收访问邮件的邮箱：<填写自己的邮箱>
 
-添加原始Excel后提交：
-使用这个技能处理这个询价文件。
-保留原始询价工作表，匹配结果按需求分组：父行保留原始需求，子行逐件列出首选和备选。
-展示型号、单位、数量、参考单价、匹配状态、依据及待确认项；产品名称保留详情链接，最后导出Excel。
+收到邮件后点击“进入平台并复制密钥”，按页面提示完成验证；进入API密钥页面后点击已启用密钥右侧的“复制密钥”。
+回到当前私密对话发送：
+请使用这个 MRO API Key，帮我完成配置并验证。
+API Key：<粘贴完整密钥>
 
-API平台：https://mro-api.iwilley.com/
-没有 API Key 时，向 Agent 提供接收访问邮件的邮箱；点击邮件链接，在网页完成阿里云行为验证后自动激活、登录并进入 API 密钥页面。找到 MRO Skill 密钥，点击右侧“复制密钥”，显示“已复制”后返回 WorkBuddy 私密对话，粘贴完整密钥并发送。不要复制带星号的遮罩文字。
-也可访问 https://mro-api.iwilley.com/email-access，填写邮箱后点击“发送访问邮件”，通过弹出的行为验证后自动发信。已有旧账号使用原方式登录，MFA 仍需完成；没有可用密钥时在 API 密钥页面创建。
-余额不足时访问 https://mro-api.iwilley.com/wallet 充值，再告诉 Agent 继续；保留已完成的匹配结果。
+准备原始询价Excel：每行一个产品需求，只有产品描述必填；其他字段有就填，没有可留空。列顺序不限，无需固定模板。
+
+添加原始Excel并确认文件后发送：
+使用这个技能处理这个询价文件。保留原始询价工作表，匹配结果按需求分组：父行保留原始需求，子行列出首选和备选，展示参考单价、匹配状态、依据和待确认项，最后导出Excel。
+
+已有可用密钥直接复制使用。邮件链接15分钟有效；旧账号按原方式登录，按页面提示完成MFA。Agent无法发信时可打开：https://mro-api.iwilley.com/email-access
