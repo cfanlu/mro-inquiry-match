@@ -8,9 +8,9 @@
 
 ## WorkBuddy 操作视频 / Video Tutorial
 
-https://github.com/user-attachments/assets/531da73b-7f9a-4821-83f5-0bfedb73b2a1
+https://github.com/user-attachments/assets/16f692e8-9ec2-4919-b219-3f1c1a1ce348
 
-从安装 Skill、注册并邮件激活账号、获取 API Key，到在 WorkBuddy 对话框完成配置、提交询价 Excel，跟着教程完成第一次询价。
+从安装 Skill、提供邮箱接收访问邮件、复制 API Key，到在 WorkBuddy 对话框完成接入、提交询价 Excel，跟着教程完成第一次询价。
 
 [下载视频](https://github.com/cfanlu/mro-inquiry-match/raw/refs/heads/main/assets/mro-inquiry-workbuddy-tutorial.mp4) · [操作说明](docs/workbuddy-tutorial.zh-CN.md) · [字幕](assets/mro-inquiry-workbuddy-tutorial.zh-CN.srt) · [复制指令](assets/mro-inquiry-workbuddy-instructions.zh-CN.txt)
 
