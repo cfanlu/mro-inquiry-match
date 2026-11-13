@@ -8,7 +8,7 @@
 
 ## WorkBuddy 操作视频 / Video Tutorial
 
-https://github.com/user-attachments/assets/16f692e8-9ec2-4919-b219-3f1c1a1ce348
+https://github.com/user-attachments/assets/c3a67037-bc1f-469e-a370-16a710c84b6b
 
 从安装 Skill、提供邮箱接收访问邮件、复制 API Key，到在 WorkBuddy 对话框完成接入、提交询价 Excel，跟着教程完成第一次询价。
 
